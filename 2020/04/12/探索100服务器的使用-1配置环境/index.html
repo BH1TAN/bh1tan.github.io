@@ -9,7 +9,7 @@
 	
 	<title>
 	
-		Hello World | 
+		探索100服务器的使用-1配置环境 | 
 	 
 	Personal Reality
 	</title>
@@ -91,7 +91,7 @@
 
 			
 							<ul>
-								<li class="file active">
+								<li class="file">
 									<a href="/2020/04/11/hello-world/">
 										hello-world
 									</a>
@@ -100,7 +100,7 @@
 							</ul>
 			
 							<ul>
-								<li class="file">
+								<li class="file active">
 									<a href="/2020/04/12/%E6%8E%A2%E7%B4%A2100%E6%9C%8D%E5%8A%A1%E5%99%A8%E7%9A%84%E4%BD%BF%E7%94%A8-1%E9%85%8D%E7%BD%AE%E7%8E%AF%E5%A2%83/">
 										探索100服务器的使用-1配置环境
 									</a>
@@ -125,12 +125,12 @@
 	<div id="content">
 		<h1 id="article-title">
 
-	hello-world
+	探索100服务器的使用-1配置环境
 </h1>
 <div class="article-meta">
 	
 	<span>BH1TAN</span>
-	<span>2020-04-11 16:47:26</span>
+	<span>2020-04-12 09:47:08</span>
     
 		<div id="article-categories">
             
@@ -139,19 +139,42 @@
 </div>
 
 <div id="article-content">
-	<p>Welcome to <a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/" target="_blank" rel="noopener">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html" target="_blank" rel="noopener">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues" target="_blank" rel="noopener">GitHub</a>.</p>
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">"My New Post"</span></span><br></pre></td></tr></table></figure>
-
-<p>More info: <a href="https://hexo.io/docs/writing.html" target="_blank" rel="noopener">Writing</a></p>
-<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a href="https://hexo.io/docs/server.html" target="_blank" rel="noopener">Server</a></p>
-<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a href="https://hexo.io/docs/generating.html" target="_blank" rel="noopener">Generating</a></p>
-<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a href="https://hexo.io/docs/one-command-deployment.html" target="_blank" rel="noopener">Deployment</a></p>
+	<h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>关于课题组所租用的高性能计算平台“探索100”的使用将分为2个部分介绍，分别是“配置环境”（本文）和“日常使用”。本文将介绍如何配置登录和使用环境，成功配置以后就不用再看了；“日常使用”则作为平常运行计算时的参考，主治忘记了操作顺序，忘记了常用命令之类的问题。大体上，这两篇文章属于“照着操作能用”的指南，若需要更详细地了解硬件配置，运行过程等细节，可参考《探索100用户使用手册》等文件。</p>
+<p>探索100服务器相比于个人计算机，优势在于核数多（740节点*12核=8880核），内存大（370个节点32GB，370个节点48GB），运行并行任务有显著的时间提升。因此我们在日常使用MCNP，Matlab，Geant，Talys等程序时，如果任务要求内存大，或者运行时间长，可以考虑使用探索100服务器加快计算。</p>
+<h2 id="整体思路"><a href="#整体思路" class="headerlink" title="整体思路"></a>整体思路</h2><p>本文主要就两点内容：</p>
+<ol>
+<li>下载SSH终端</li>
+<li>配置连接<ol>
+<li>配置用户名和密码</li>
+<li>配置密钥登录</li>
+</ol>
+</li>
+</ol>
+<h2 id="下载SSH终端"><a href="#下载SSH终端" class="headerlink" title="下载SSH终端"></a>下载SSH终端</h2><ol>
+<li>windows<br>常见的SSH终端有<a href="https://www.chiark.greenend.org.uk/~sgtatham/putty/latest.html" target="_blank" rel="noopener">PuTTY</a>（轻便简单），<a href="https://www.netsarang.com/zh/xshell/" target="_blank" rel="noopener">Xshell</a>（久负盛名，功能丰富），<a href="https://mobaxterm.mobatek.net/" target="_blank" rel="noopener">MobaXterm</a>（笔者在用，功能强大）等等。择一从官网下载即可。之所以我选择MobaXterm是因为其默认在打开ssh连接的同时打开sftp连接，可以让我们很方便地上传和下载文件。</li>
+<li>mac<br>直接使用terminal的SSH命令即可，我没有尝试过，欢迎了解的同学私信我添加这部分内容。</li>
+<li>Linux<br>直接使用terminal的SSH命令即可，我没有尝试过，欢迎了解的同学私信我添加这部分内容。</li>
+</ol>
+<h2 id="配置连接"><a href="#配置连接" class="headerlink" title="配置连接"></a>配置连接</h2><p>下面以MobaXterm软件为例介绍如何配置用户名密码及密钥。</p>
+<ol>
+<li>点击Session</li>
+<li>点击SSH</li>
+<li>输入远程主机ip</li>
+<li>打开“MobaXterm password settings”页面<br><img src="1.jpg" alt="建立ssh连接"></li>
+<li>点击“Credentials”</li>
+<li>新建</li>
+<li>输入Name（方便自己识别的名字，可以任意取）</li>
+<li>输入用户名和密码（看课题组资料）</li>
+<li>确定<br><img src="2.jpg" alt="增加credential"></li>
+<li>点击“OK”关闭“MobaXterm password settings”页面 </li>
+<li>勾选“Specify username”</li>
+<li>下拉菜单</li>
+<li>选择第7步设置的Name<br><img src="3.jpg" alt="选择用户名密码"></li>
+<li>打开“Advanced SSH settings”</li>
+<li>勾选“Use private key”</li>
+<li>选择私钥文件（课题组资料中的key文件）</li>
+<li>确认<br><img src="4.jpg" alt="设置密钥"><br>这时在主界面的左边栏会出现一个黑底黄钥匙的图标，代表一个ssh连接，此时双击它会报错“无法连接”，这是因为我们还没有连接“探索100”服务器的VPN，操作方法请看下一篇文章。<br><img src="5.jpg" alt="出现session"></li>
+</ol>
 
 </div>
 
@@ -159,13 +182,18 @@
     <div class="post-guide">
         <div class="item left">
             
-              <a href="/2020/04/12/%E6%8E%A2%E7%B4%A2100%E6%9C%8D%E5%8A%A1%E5%99%A8%E7%9A%84%E4%BD%BF%E7%94%A8-1%E9%85%8D%E7%BD%AE%E7%8E%AF%E5%A2%83/">
+              <a href="/2020/04/12/%E6%8E%A2%E7%B4%A2100%E6%9C%8D%E5%8A%A1%E5%99%A8%E7%9A%84%E4%BD%BF%E7%94%A8-2%E6%97%A5%E5%B8%B8%E6%93%8D%E4%BD%9C/">
                   <i class="fa fa-angle-left" aria-hidden="true"></i>
-                  探索100服务器的使用-1配置环境
+                  探索100服务器的使用-2日常操作
               </a>
             
         </div>
         <div class="item right">
+            
+              <a href="/2020/04/11/hello-world/">
+                hello-world
+                <i class="fa fa-angle-right" aria-hidden="true"></i>
+              </a>
             
         </div>
     </div>
